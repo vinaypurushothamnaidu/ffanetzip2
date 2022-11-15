@@ -82,16 +82,16 @@ def train(net,loader_train,loader_test,optim,criterion):
 			if ssim_eval > max_ssim and psnr_eval > max_psnr :
 				max_ssim=max(max_ssim,ssim_eval)
 				max_psnr=max(max_psnr,psnr_eval)
-				torch.save({
-							'step':step,
-							'max_psnr':max_psnr,
-							'max_ssim':max_ssim,
-							'ssims':ssims,
-							'psnrs':psnrs,
-							'losses':losses,
-							'model':net.state_dict()
-				},opt.model_dir)
-				print(f'\n model saved at step :{step}| max_psnr:{max_psnr:.4f}|max_ssim:{max_ssim:.4f}')
+				# torch.save({
+				# 			'step':step,
+				# 			'max_psnr':max_psnr,
+				# 			'max_ssim':max_ssim,
+				# 			'ssims':ssims,
+				# 			'psnrs':psnrs,
+				# 			'losses':losses,
+				# 			'model':net.state_dict()
+				# },opt.model_dir)
+				# print(f'\n model saved at step :{step}| max_psnr:{max_psnr:.4f}|max_ssim:{max_ssim:.4f}')
 				torch.save({
 							'step':step,
 							'max_psnr':max_psnr,
