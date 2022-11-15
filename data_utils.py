@@ -110,8 +110,8 @@ print(pwd)
 path='/kaggle/input/'#path to your 'data' folder
 
 
-train_loader=DataLoader(dataset=RESIDE_Dataset(path+'residenh/RESIDE-NH/ITS',train=True),batch_size=BS,shuffle=True)
-test_loader=DataLoader(dataset=RESIDE_Dataset(path+'residenh/RESIDE-NH/RESIDENH-TEST/indoor',train=False),batch_size=1,shuffle=False)
+train_loader=DataLoader(dataset=RESIDE_Dataset(path+'residenh/RESIDENH/ITS',train=True),batch_size=BS,shuffle=True)
+test_loader=DataLoader(dataset=RESIDE_Dataset(path+'residenh/RESIDENH/RESIDENH-TEST/indoor',train=False),batch_size=1,shuffle=False)
 
 if __name__ == "__main__":
     pass
