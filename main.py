@@ -100,7 +100,7 @@ def train(net,loader_train,loader_test,optim,criterion):
 							'psnrs':psnrs,
 							'losses':losses,
 							'model':net.state_dict()
-				},"/kaggle/working/ffanetzip/ffamodelkaggle.pk")
+				},"/kaggle/working/ffanetzip2/ffamodelkaggle.pk")
 				print(f'\n model saved at step :{step}| max_psnr:{max_psnr:.4f}|max_ssim:{max_ssim:.4f}')
 
 
