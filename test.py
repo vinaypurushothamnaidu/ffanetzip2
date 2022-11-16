@@ -25,17 +25,17 @@ parser.add_argument('--test_imgs',type=str,default='test_imgs',help='Test imgs f
 opt=parser.parse_args()
 dataset=opt.task
 gps=3
-blocks=19
+blocks=10
 img_dir=abs+opt.test_imgs+'/'
 output_dir=abs+f'pred_FFA_{dataset}/'
 print("pred_dir:",output_dir)
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
-model_dir=abs+f'trained_models/{dataset}_train_ffa_{gps}_{blocks}.pk'
+model_dir=abs+f'trained_models/ffamodelkaggle2.pk'
 device='cuda' if torch.cuda.is_available() else 'cpu'
 ckp=torch.load(model_dir,map_location=device)
 net=FFA(gps=gps,blocks=blocks)
-net=nn.DataParallel(net)
+# net=nn.DataParallel(net)
 net.load_state_dict(ckp['model'])
 net.eval()
 for im in os.listdir(img_dir):
@@ -43,11 +43,11 @@ for im in os.listdir(img_dir):
     haze = Image.open(img_dir+im)
     haze1= tfs.Compose([
         tfs.ToTensor(),
-        tfs.Normalize(mean=[0.64, 0.6, 0.58],std=[0.14,0.15, 0.152])
+        # tfs.Normalize(mean=[0.64, 0.6, 0.58],std=[0.14,0.15, 0.152])
     ])(haze)[None,::]
     haze_no=tfs.ToTensor()(haze)[None,::]
     with torch.no_grad():
         pred = net(haze1)
     ts=torch.squeeze(pred.clamp(0,1).cpu())
-    tensorShow([haze_no,pred.clamp(0,1).cpu()],['haze','pred'])
+    # tensorShow([haze_no,pred.clamp(0,1).cpu()],['haze','pred'])
     vutils.save_image(ts,output_dir+im.split('.')[0]+'_FFA.png')
